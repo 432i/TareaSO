@@ -1,23 +1,24 @@
 import java.util.Scanner;
 
-
+//Clase capaz de ejecutar el código de cada proceso
 public class ThreadSort extends Thread {
 	int array[];
 	int inicio, fin;
 	
-	
+	//Constructor de la clase que guarda el arreglo de números, posición inicial y posición final
 	public ThreadSort (int[] array, int inicio, int fin) {
 		this.array = array;
 		this.inicio = inicio;
 		this.fin = fin;
 	}
 	
+	//Método que permite ejecutar la hebra
 	public void run() {
 		Sort(array, inicio, fin);
 	}
 	
 
-	
+	//Método que parte el arreglo en 2 y cambia valores, ordenándolos
 	public static int particion(int[] array, int inicio, int fin) {
 		int pivote = array[fin];
 		int i = inicio -1;
@@ -35,6 +36,8 @@ public class ThreadSort extends Thread {
 		return i+1;
 	}
 	
+	
+	//Método que invoca a las hebras para ser ejecutadas en cada parte del arreglo
 	public static void Sort(int[] array, int inicio, int fin) {
 		if(inicio < fin) {
 			int p = particion(array, inicio, fin);
@@ -51,6 +54,7 @@ public class ThreadSort extends Thread {
 		}
 	}
 	
+	//Método main para la ejecución del programa completo, solicita la cantidad total de números a ingresar y luego solicita ingresar dichos números
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Cuantos numeros ingresara?: ");
@@ -63,6 +67,7 @@ public class ThreadSort extends Thread {
 		}
 		
 		ThreadSort.Sort(array, 0, n-1);
+		System.out.println("Tu arreglo se ordeno de la siguiente manera: ");
 		
 		for(int k=0; k<n; k++) {
 			System.out.println(array[k]);
